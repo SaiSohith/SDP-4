@@ -73,7 +73,11 @@
             body: JSON.stringify(obj) 
             })
             .then(data => {
-                console.log(data); // JSON data parsed by `data.json()` call
+                console.log(data.status); // JSON data parsed by `data.json()` call
+                if(data.status==200){
+                    alert('Succesfully Inserted the Data');
+                    window.location.href='./Details.html';
+                }
             });
         }
 

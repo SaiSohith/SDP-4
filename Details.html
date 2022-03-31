@@ -40,6 +40,8 @@
                             <div class="form-button mt-3">
                                 <button id="submit" type="submit" onclick="submitData()" class="btn btn-primary">Get Employee Details</button>
                             </div>
+                            <br>
+                            <p id="p1"></p>
                         </div>
                     </div>
                 </div>
@@ -47,25 +49,22 @@
         </div>
     </div>
     <script>
-       
+        const p = document.getElementById("p1")
       async  function submitData(){
             let gmail=document.getElementById("gmail").value;
-        await   fetch(`https://wsw4ge7ty0.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?Email=${gmail}`,{
+        await   fetch(`https://44flig6tai.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?EmailID=${gmail}`,{
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
-
+      }
     }).then(response => {
-          console.log(response);
           return response.json();
-        }).then(data => console.log(data));
-            
-            // fetch(`https://wsw4ge7ty0.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?Email=${gmail}`)
-            // .then(data => {
-            //     console.log(data); // JSON data parsed by `data.json()` call
-            // });
-        }
+        })
+        .then(data =>
+        data.Item!==undefined?p.innerText=`EmailId: ${data.Item.EmailID}\n\nFirst Name : ${data.Item.FirstName}\n\nLast Name : ${data.Item.LastName}`:alert("Data Not Available\nRedirecting....",window.location.href="./Form.html")
+        );
+    }
+    
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
