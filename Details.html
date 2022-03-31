@@ -31,21 +31,42 @@
                     <div class="form-items">
                         <h3>Get Employee Details by Email:</h3>
                         <br>
-                        <form action="/" method="GET">
+                        <div>
                             <div class="col-md-12">
                                 <label >Enter Email of the Employee:</label>
-                                <input class="form-control" type="text" name="a" placeholder="Email" required>
+                                <input id="gmail" class="form-control" type="text" name="a" placeholder="Email" required>
                             </div>
                             
                             <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Get Employee Details</button>
+                                <button id="submit" type="submit" onclick="submitData()" class="btn btn-primary">Get Employee Details</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+       
+      async  function submitData(){
+            let gmail=document.getElementById("gmail").value;
+        await   fetch(`https://wsw4ge7ty0.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?Email=${gmail}`,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+
+    }).then(response => {
+          console.log(response);
+          return response.json();
+        }).then(data => console.log(data));
+            
+            // fetch(`https://wsw4ge7ty0.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?Email=${gmail}`)
+            // .then(data => {
+            //     console.log(data); // JSON data parsed by `data.json()` call
+            // });
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
