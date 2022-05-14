@@ -6,12 +6,15 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
+    
 }
 
 html, body {
     height: 100%;
     background-color: #152733;
     overflow: hidden;
+    /* overflow-y: scroll; */
+
 }
 
 
@@ -146,4 +149,8 @@ html, body {
 
 .valid-feedback{
    color: #2acc80;
+}
+#register {
+    max-height: 675px;
+    overflow: scroll;
 }

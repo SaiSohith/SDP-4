@@ -29,12 +29,12 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Get Employee Details by Email:</h3>
+                        <h3>Get Employee Details by Employee Id:</h3>
                         <br>
                         <div>
                             <div class="col-md-12">
-                                <label >Enter Email of the Employee:</label>
-                                <input id="gmail" class="form-control" type="text" name="a" placeholder="Email" required>
+                                <label >Enter Id of the Employee:</label>
+                                <input id="id" class="form-control" type="text" name="a"  required>
                             </div>
                             
                             <div class="form-button mt-3">
@@ -51,17 +51,18 @@
     <script>
         const p = document.getElementById("p1")
       async  function submitData(){
-            let gmail=document.getElementById("gmail").value;
-        await   fetch(`https://44flig6tai.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?EmailID=${gmail}`,{
+            let id=document.getElementById("id").value;
+        await   fetch(`https://44flig6tai.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?ID=${id}`,{
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     }).then(response => {
+        // console.log(response.json());
           return response.json();
         })
-        .then(data =>
-        data.Item!==undefined?p.innerText=`EmailId: ${data.Item.EmailID}\n\nFirst Name : ${data.Item.FirstName}\n\nLast Name : ${data.Item.LastName}`:alert("Data Not Available\nRedirecting....",window.location.href="./Form.html")
+        .then(data => //console.log(data)
+         data.Item!==undefined?p.innerText=`Id : ${data.Item.ID}\n\nEmailId : ${data.Item.Email}\n\nFirst Name : ${data.Item.Fname}\n\nLast Name : ${data.Item.Lname}\n\nSalary : ${data.Item.Salary}\n\nDate of Birth : ${data.Item.DOB}`:alert("Data Not Available\nRedirecting....",window.location.href="./Form.html")
         );
     }
     

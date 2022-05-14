@@ -23,33 +23,51 @@
           <a href="./Details.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">View Employees</a>
           <a href="./Form.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Add Employee</a>
         </div>
-    <div class="form-body">
+    <div id="register" class="form-body">
         <div class="row">
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
                         <h3>Employee Details</h3>
                         <p>Fill in the data below.</p>
+                        <!-- <form> -->
                         <div>
                             <div class="col-md-12">
+                                <label >Employee ID :</label>
+                                <input id="empid" class="form-control" type="text"  placeholder="Employee Identity" required>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
                                 <label >First Name :</label>
-                                <input id="fname" class="form-control" type="text" name="a" placeholder="First Name" required>
+                                <input id="fname" class="form-control" type="text"  placeholder="First Name" required>
                             </div>
                             <br>
                             <div class="col-md-12">
                                 <label >Last  Name :</label>
-                                <input id="lname" class="form-control" type="text" name="a" placeholder="Last Name" required>
+                                <input id="lname" class="form-control" type="text"  placeholder="Last Name" required>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <label >Date of Birth :</label>
+                                <input id="dob" class="form-control" type="date"  placeholder="Date of Birth" required>
                             </div>
                             <br>
                             <div class="col-md-12">
                                 <label >Email :</label>
-                                <input id="mail" class="form-control" type="mail" name="a" placeholder="Email" required>
+                                <input id="mail" class="form-control" type="mail"  placeholder="Email" required>
                             </div>
                             <br>
+                            <div class="col-md-12">
+                                <label >Salary :</label>
+                                <input id="salary" class="form-control" type="text"  placeholder="salary" required>
+                            </div>
+                            <br>
+
                             <div class="form-button mt-3">
                                 <button id="submit" type="submit" onclick="submitData()" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
@@ -58,15 +76,22 @@
     <script>
         
         function submitData(){
+            let id=document.getElementById("empid").value;
             let fname=document.getElementById("fname").value;
             let lname=document.getElementById("lname").value;
             let mail=document.getElementById("mail").value;
+            let dob=document.getElementById("dob").value;
+            let salary=document.getElementById("salary").value;
+            
             const obj={
-            "EmailID": mail,
+            "ID":id,
             "FirstName": fname,
-            "LastName": lname
+            "LastName": lname,
+            "Email": mail,
+            "DOB":dob,
+            "Salary":salary
             }
-        
+        // console.log(obj)
             fetch(`https://313obq5lt4.execute-api.us-east-1.amazonaws.com/dev/postemployeedetails`,
             {
             method:'POST',
@@ -77,6 +102,9 @@
                 if(data.status==200){
                     alert('Succesfully Inserted the Data');
                     window.location.href='./Details.html';
+                }
+                else{
+                    alert(data.status)
                 }
             });
         }
