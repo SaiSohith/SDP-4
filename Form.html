@@ -34,7 +34,7 @@
                         <div>
                             <div class="col-md-12">
                                 <label >Employee ID :</label>
-                                <input id="empid" class="form-control" type="text"  placeholder="Employee Identity" required>
+                                <input id="empid" class="form-control" type="text" onblur="idcheck()" placeholder="Employee Identity" required>
                             </div>
                             <br>
                             <div class="col-md-12">
@@ -74,6 +74,24 @@
         </div>
     </div>
     <script>
+
+        function idcheck(){
+            let id=document.getElementById("empid").value;
+            fetch(`https://44flig6tai.execute-api.us-east-1.amazonaws.com/dev/getemployeedetailbyemail?ID=${id}`,{
+            headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            }
+        }).then(response => {
+            // console.log(response.json());
+                return response.json();
+            })
+            .then(data => //console.log(data)
+                data.Item!==undefined?alert("Data Already Exists Redirecting... ",window.location.href="./Details.html"):console.log()
+            );
+        }
+
+
         
         function submitData(){
             let id=document.getElementById("empid").value;
